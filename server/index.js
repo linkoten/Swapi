@@ -47,16 +47,16 @@ const init = async () => {
     // Route dynamique pour obtenir les données de SWAPI
     server.route({
         method: 'GET',
-        path: '/{endpoint*}',  // Paramètre dynamique pour le chemin
+        path: '/{endpoint*}', 
         options: {
             auth: 'simple'
         },
         handler: async (request, h) => {
-            const page = request.query.page || 1;  // Page actuelle, par défaut 1
+            const search = request.query.search || ""; 
             const { endpoint } = request.params;
             const baseUrl = 'https://swapi.dev/api/';
-            const url = `${baseUrl}${endpoint}/?page=${page}`;
-
+            const url = `${baseUrl}${endpoint}/?search=${search}`; 
+    
             try {
                 const response = await axios.get(url);
                 return response.data;
